@@ -1,0 +1,31 @@
+name: 'Monorepo container build action'
+author: Ian Belcher
+description: An action to build and push a docker container via a command
+branding:
+  color: 'blue'
+  icon: 'anchor'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+inputs:
+  CONTAINER_NAME:
+    description: The name of the container that this action is building
+    require: true
+  COMMAND_TO_RUN:
+    description: The command to run to build the container
+    require: true
+  DOCKER_REGISTRY:
+    description: The registry to use. This is likely in the form my-registry.domain.com:4000 or similar
+    require: false
+    default: ''
+  DOCKER_REGISTRY_USERNAME:
+    description: The username of the registry user
+    require: true
+  DOCKER_REGISTRY_PASSWORD:
+    description: The password of the registry user
+    require: true
+outputs:
+  IMAGE_SHA:
+    description: The SHA of the pushed image
+  IMAGE_URL:
+    description: The full URL of the pushed image
