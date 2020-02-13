@@ -8,20 +8,20 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
 inputs:
-  CONTAINER_NAME:
+  container_name:
     description: The name of the container that this action is building
     require: true
-  COMMAND_TO_RUN:
+  command_to_run:
     description: The command to run to build the container
     require: true
-  DOCKER_REGISTRY:
+  docker_registry:
     description: The registry to use. This is likely in the form my-registry.domain.com:4000 or similar
     require: false
     default: ''
-  DOCKER_REGISTRY_USERNAME:
+  docker_registry_username:
     description: The username of the registry user
     require: true
-  DOCKER_REGISTRY_PASSWORD:
+  docker_registry_password:
     description: The password of the registry user
     require: true
 outputs:

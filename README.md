@@ -35,11 +35,11 @@ jobs:
       - name: Build and push CONTAINER_NAME
         uses: ianbelcher/monorepo-container-build-action@master
         with:
-          CONTAINER_NAME: CONTAINER_NAME
-          COMMAND_TO_RUN: '(cd path/to/build/script && build.sh)'
-          DOCKER_REGISTRY: ${{ secrets.DOCKER_REGISTRY }}
-          DOCKER_REGISTRY_USERNAME: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
-          DOCKER_REGISTRY_PASSWORD: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
+          container_name: CONTAINER_NAME
+          command_to_run: '(cd path/to/build/script && build.sh)'
+          docker_registry: ${{ secrets.DOCKER_REGISTRY }}
+          docker_registry_username: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
+          docker_registry_password: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
 ```
 
 If you wish to just build all container without the `on.push.paths` filter on all pushes, then
@@ -60,19 +60,19 @@ jobs:
       - name: Build and push CONTAINER_NAME
         uses: ianbelcher/monorepo-container-build-action@master
         with:
-          CONTAINER_NAME: CONTAINER_NAME
-          COMMAND_TO_RUN: '(cd path/to/build/script && build.sh)'
-          DOCKER_REGISTRY: ${{ secrets.DOCKER_REGISTRY }}
-          DOCKER_REGISTRY_USERNAME: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
-          DOCKER_REGISTRY_PASSWORD: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
+          container_name: CONTAINER_NAME
+          command_to_run: '(cd path/to/build/script && build.sh)'
+          docker_registry: ${{ secrets.DOCKER_REGISTRY }}
+          docker_registry_username: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
+          docker_registry_password: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
       - name: Build and push SECOND_CONTAINER_NAME
         uses: ianbelcher/monorepo-container-build-action@master
         with:
-          CONTAINER_NAME: SECOND_CONTAINER_NAME
-          COMMAND_TO_RUN: '(cd path/to/build/second-script && build.sh)'
-          DOCKER_REGISTRY: ${{ secrets.DOCKER_REGISTRY }}
-          DOCKER_REGISTRY_USERNAME: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
-          DOCKER_REGISTRY_PASSWORD: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
+          container_name: SECOND_CONTAINER_NAME
+          command_to_run: '(cd path/to/build/second-script && build.sh)'
+          docker_registry: ${{ secrets.DOCKER_REGISTRY }}
+          docker_registry_username: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
+          docker_registry_password: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
 ```
 
 From here, using `steebchen/kubectl` allows you to update you Kubernetes state for each of the
@@ -97,11 +97,11 @@ jobs:
         uses: ianbelcher/monorepo-container-build-action@master
         id: monorepoContainerBuildActionId1
         with:
-          CONTAINER_NAME: CONTAINER_NAME
-          COMMAND_TO_RUN: '(cd path/to/build/script && build.sh)'
-          DOCKER_REGISTRY: ${{ secrets.DOCKER_REGISTRY }}
-          DOCKER_REGISTRY_USERNAME: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
-          DOCKER_REGISTRY_PASSWORD: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
+          container_name: CONTAINER_NAME
+          command_to_run: '(cd path/to/build/script && build.sh)'
+          docker_registry: ${{ secrets.DOCKER_REGISTRY }}
+          docker_registry_username: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
+          docker_registry_password: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
       - name: Update Deployment
         uses: steebchen/kubectl@master
         env:
@@ -119,11 +119,11 @@ jobs:
         uses: ianbelcher/monorepo-container-build-action@master
         id: monorepoContainerBuildActionId2
         with:
-          CONTAINER_NAME: SECOND_CONTAINER_NAME
-          COMMAND_TO_RUN: '(cd path/to/build/second-script && build.sh)'
-          DOCKER_REGISTRY: ${{ secrets.DOCKER_REGISTRY }}
-          DOCKER_REGISTRY_USERNAME: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
-          DOCKER_REGISTRY_PASSWORD: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
+          container_name: SECOND_CONTAINER_NAME
+          command_to_run: '(cd path/to/build/second-script && build.sh)'
+          docker_registry: ${{ secrets.DOCKER_REGISTRY }}
+          docker_registry_username: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
+          docker_registry_password: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
       - name: Update Deployment
         uses: steebchen/kubectl@master
         env:
