@@ -75,7 +75,7 @@ jobs:
           docker_registry_password: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
 ```
 
-From here, using `steebchen/kubectl` allows you to update you Kubernetes state for each of the
+From here, using `Consensys/k8s-gh-action` allows you to update you Kubernetes state for each of the
 built containers quite easily using the output variable `IMAGE_URL`. Notice the use of setting
 the id of the step (`monorepoContainerBuildActionId*`) and then accessing that value in the follow
 up step.
@@ -103,13 +103,13 @@ jobs:
           docker_registry_username: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
           docker_registry_password: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
       - name: Update Deployment
-        uses: steebchen/kubectl@master
+        uses: Consensys/k8s-gh-action@master
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         with:
           args: set image --record deployment/CONTAINER_DEPLOYMENT_NAME CONTAINER_POD_NAME=${{ steps.monorepoContainerBuildActionId1.outputs.IMAGE_URL }}
       - name: Verify rollout
-        uses: steebchen/kubectl@master
+        uses: Consensys/k8s-gh-action@master
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         with:
@@ -125,13 +125,13 @@ jobs:
           docker_registry_username: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
           docker_registry_password: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
       - name: Update Deployment
-        uses: steebchen/kubectl@master
+        uses: Consensys/k8s-gh-action@master
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         with:
           args: set image --record deployment/SECOND_CONTAINER_DEPLOYMENT_NAME SECOND_CONTAINER_POD_NAME=${{ steps.monorepoContainerBuildActionId2.outputs.IMAGE_URL }}
       - name: Verify rollout
-        uses: steebchen/kubectl@master
+        uses: Consensys/k8s-gh-action@master
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         with:

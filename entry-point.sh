@@ -5,26 +5,6 @@ set -e
 # GITHUB_REPOSITORY
 # GITHUB_SHA
 
-if [[ -z "$INPUT_CONTAINER_NAME" ]]; then
-	echo "Missing container_name"
-	exit 1
-fi
-
-if [[ -z "$INPUT_COMMAND_TO_RUN" ]]; then
-	echo "Missing command_to_run"
-	exit 1
-fi
-
-if [[ -z "$INPUT_DOCKER_REGISTRY_USERNAME" ]]; then
-	echo "Missing docker_registry_username"
-	exit 1
-fi
-
-if [[ -z "$INPUT_DOCKER_REGISTRY_PASSWORD" ]]; then
-	echo "Missing docker_registry_password"
-	exit 1
-fi
-
 echo ${INPUT_DOCKER_REGISTRY_PASSWORD} | docker login ${INPUT_DOCKER_REGISTRY} -u "${INPUT_DOCKER_REGISTRY_USERNAME}" --password-stdin
 
 if [[ -z "${INPUT_DOCKER_REGISTRY}" ]]; then
@@ -51,8 +31,6 @@ fi
 # This is really bad... Fix this. We don't have bash so this will do for the moment.
 eval "$INPUT_COMMAND_TO_RUN"
 
-# Remove the existing image if it exists. Likely 100% chance that it doesn't be safe for future
-docker rmi -f "${IMAGE_TO_PUSH}" || true
 # Tag the built image to the remote version
 docker tag "${INPUT_CONTAINER_NAME}" "${IMAGE_TO_PUSH}"
 #  Push it!

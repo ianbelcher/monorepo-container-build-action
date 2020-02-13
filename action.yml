@@ -10,20 +10,20 @@ runs:
 inputs:
   container_name:
     description: The name of the container that this action is building
-    require: true
+    required: true
   command_to_run:
     description: The command to run to build the container
-    require: true
+    required: true
   docker_registry:
     description: The registry to use. This is likely in the form my-registry.domain.com:4000 or similar
-    require: false
+    required: false
     default: ''
   docker_registry_username:
     description: The username of the registry user
-    require: true
+    required: true
   docker_registry_password:
     description: The password of the registry user
-    require: true
+    required: true
 outputs:
   IMAGE_SHA:
     description: The SHA of the pushed image
