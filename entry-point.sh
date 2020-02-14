@@ -19,6 +19,7 @@ fi
 SHA=$(echo "${GITHUB_SHA}" | cut -c1-12)
 IMAGE_TO_PULL="${IMAGE_PREFIX}/${INPUT_CONTAINER_NAME}"
 IMAGE_TO_PUSH="${IMAGE_PREFIX}/${INPUT_CONTAINER_NAME}:${SHA}"
+IMAGE_TO_PUSH_LATEST="${IMAGE_PREFIX}/${INPUT_CONTAINER_NAME}:latest"
 
 # Add Arguments For Caching
 BUILDPARAMS=""
@@ -31,10 +32,10 @@ fi
 # This is really bad... Fix this. We don't have bash so this will do for the moment.
 eval "$INPUT_COMMAND_TO_RUN"
 
-# Tag the built image to the remote version
 docker tag "${INPUT_CONTAINER_NAME}" "${IMAGE_TO_PUSH}"
-#  Push it!
 docker push "${IMAGE_TO_PUSH}"
+docker tag "${INPUT_CONTAINER_NAME}" "${IMAGE_TO_PUSH_LATEST}"
+docker push "${IMAGE_TO_PUSH_LATEST}"
 
 echo "::set-output name=IMAGE_SHA::${SHA}"
 echo "::set-output name=IMAGE_URL::${IMAGE_TO_PUSH}"

@@ -4,7 +4,7 @@
 
 This is a quick custom action to for a private project.
 
-The main problem it solves is where you have a monorepo of containers for a microservice based 
+The main problem it solves is where you have a monorepo of containers for a micro-service based 
 system (or similar) and due to shared dependencies, require pre-steps in the build process such
 as copying files so that they become available in the docker build context.
 
