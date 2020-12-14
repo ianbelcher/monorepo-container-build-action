@@ -20,9 +20,12 @@ inputs:
     default: ''
   docker_registry_username:
     description: The username of the registry user
-    required: true
+    required: false
   docker_registry_password:
     description: The password of the registry user
+    required: false
+  stage:
+    description: The CI/CD stage we are building e.g. production or staging or other
     required: true
 outputs:
   IMAGE_SHA:

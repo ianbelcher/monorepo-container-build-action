@@ -37,8 +37,12 @@ eval "$INPUT_COMMAND_TO_RUN"
 
 docker tag "${INPUT_CONTAINER_NAME}" "${IMAGE_TO_PUSH}"
 docker push "${IMAGE_TO_PUSH}"
-docker tag "${INPUT_CONTAINER_NAME}" "${IMAGE_TO_PUSH_LATEST}"
-docker push "${IMAGE_TO_PUSH_LATEST}"
+
+# only tag with latest if on production branch
+if [ $INPUT_STAGE = 'production']; then
+  docker tag "${INPUT_CONTAINER_NAME}" "${IMAGE_TO_PUSH_LATEST}"
+  docker push "${IMAGE_TO_PUSH_LATEST}"
+fi
 
 echo "::set-output name=IMAGE_SHA::${SHA}"
 echo "::set-output name=IMAGE_URL::${IMAGE_TO_PUSH}"
